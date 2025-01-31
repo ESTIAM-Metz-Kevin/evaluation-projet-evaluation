@@ -2,6 +2,36 @@ import pokemon from "./data/pokemon_4x3.js";
 
 console.log(pokemon);
 
+// CODE MARIA
+
+let firstPokemon = null;
+let secondPokemon = null;
+document.addEventListener("DOMContentLoaded", () => {
+   
+ // Boucle principale
+for (let i = 0; i < pokemon.length; i++) {
+console.log(pokemon[i].name);
+console.log(pokemon[i].type);
+
+const bush = document.querySelector(`.bush[data-index="${i}"]`);
+
+if (bush) {
+bush.addEventListener("click", () => {
+if (!firstPokemon) {
+ firstPokemon = pokemon[i];
+bush.classList.add("hidden");
+displayPokemon(firstPokemon); } else if (!secondPokemon) 
+        {
+        secondPokemon = pokemon[i];
+        bush.classList.add("hidden");
+        displayPokemon(secondPokemon);
+        checkMatch(firstPokemon, secondPokemon);
+        }
+            });
+        }
+    }
+});
+
 // Boucle principale du jeu
 const pokemons = ["pikachu.png", "bulbasaur.png", "charmander.png", "squirtle.png"];
 const bushes = document.querySelectorAll(".bush");
