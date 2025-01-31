@@ -12,7 +12,7 @@ let canClick = true;
 
 bushes.forEach(bush => {
 bush.addEventListener("click", () => {
-    if (!canClick || bush.classList.contains("revealed")) return;
+    if (canClick || bush.classList.contains("revealed")) return;
 
     const randomPokemon = pokemons[Math.floor(Math.random() * pokemons.length)];
         
