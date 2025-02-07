@@ -21,7 +21,7 @@ PokeMemon Game est un jeu de mémoire où l'objectif est de trouver les pokemons
     - Le pokemon est affiché dans la liste des pokemons capturés sur la gauche.
   - Si les deux pokemons sont c différents :
     - Après quelques secondes, on cache les pokemons et on re-affiche les buissons.
-    - Tant que les pokemons ne sont pas cachées, le joueur ne peut pas cliquer sur d'autres buissons.
+    - Tant que les pokemons ne sont pas cachées, le joueur ne peut pas cliquer sur d'autres buissons. C EST FAIT 
 
 ### Dispositions aléatoires des pokemons
 
