@@ -113,4 +113,3 @@ document.querySelector('.btn').addEventListener('click', initGame);
 // Initialiser le jeu au chargement de la page
 window.onload = initGame;
 
-// 

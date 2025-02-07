@@ -34,13 +34,13 @@ Quand le joueur a capturé tous les pokemons, il peut rejouer une nouvelle parti
 - Réinitialiser le nombre de coups pour finir la partie (pas le record).
 - Remettre tous les buissons visibles.
 - Enlever tous les pokemons.
-- Relancer votre système de disposition aléatoire des pokemons.
+- Relancer votre système de disposition aléatoire des pokemons. C EST FAIT 
 
 ### Statistiques
 
 - Quand le joueur affiche une paire de pokemons, que cela soit juste ou non, on comptabilise 1 coup.
 - Entre différentes parties, on retient le record du nombre de coups minimum pour finir le jeu. (Au minimum nous pouvons finir le jeu en 6 coups).
-- Ces deux statistiques sont affichées à l'endroit prévu dans le code HTML.
+- Ces deux statistiques sont affichées à l'endroit prévu dans le code HTML. C EST FAIT
 
 ### Animation
 
@@ -48,10 +48,10 @@ Vous avez vous quelques animations sur les buissons. Ajoutez des animations lors
 
 - Un pokemon s'affiche C'estb ait 
 - Une pokeball s'affiche C'est fait 
-- Un pokemon est ajouté à la liste des pokemons capturés c'est fait 
+- Un pokemon est ajouté à la liste des pokemons capturés C EST FAIT
 
 Ce qui a été utilisé est la librairie [`animate.css`](https://animate.style/).
-Vous n'êtes autorisés à ajouter les animations qu'[avec l'aide de JavaScript](https://animate.style/#javascript). Ce n'est que l'ajout de classes. Lisez bien la documentation sur son fonctionnement.
+Vous n'êtes autorisés à ajouter les animations qu'[avec l'aide de JavaScript](https://animate.style/#javascript). Ce n'est que l'ajout de classes. Lisez bien la documentation sur son fonctionnement. EN COURS
 
 ### Persistance des données du jeu
 
