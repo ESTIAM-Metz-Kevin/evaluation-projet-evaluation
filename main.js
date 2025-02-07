@@ -1,93 +1,92 @@
-import pokemon from "./data/pokemon_4x3.js";
+// main.js
 
-console.log(pokemon);
-
-// CODE MARIA
-
-let firstPokemon = null;
-let secondPokemon = null;
-document.addEventListener("DOMContentLoaded", () => {
-   
- // Boucle principale
-for (let i = 0; i < pokemon.length; i++) {
-console.log(pokemon[i].name);
-console.log(pokemon[i].type);
-
-const bush = document.querySelector(`.bush[data-index="${i}"]`);
-
-if (bush) {
-bush.addEventListener("click", () => {
-if (!firstPokemon) {
- firstPokemon = pokemon[i];
-bush.classList.add("hidden");
-displayPokemon(firstPokemon); } else if (!secondPokemon) 
-        {
-        secondPokemon = pokemon[i];
-        bush.classList.add("hidden");
-        displayPokemon(secondPokemon);
-        checkMatch(firstPokemon, secondPokemon);
-        }
-            });
-        }
+// Liste des Pokémon
+const pokemons = [
+    'venusaur',
+    'pikachu',
+    'charizard',
+    'venusaur',
+    'pikachu',
+    'charizard',
+  ];
+  
+  // Variables globales
+  let firstChoice = null;
+  let secondChoice = null;
+  let firstChoiceElement = null;
+  let secondChoiceElement = null;
+  let isProcessing = false;
+  
+  // Fonction pour mélanger les Pokémon
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-});
-
-// Boucle principale du jeu
-const pokemons = ["pikachu.png", "bulbasaur.png", "charmander.png", "squirtle.png"];
-const bushes = document.querySelectorAll(".bush");
-const capturedList = document.getElementById("captured-list");
-
-let selectedPokemons = [];
-let canClick = true;
-
-bushes.forEach(bush => {
-bush.addEventListener("click", () => {
-    if (canClick || bush.classList.contains("revealed")) return;
-
-    const randomPokemon = pokemons[Math.floor(Math.random() * pokemons.length)];
-        
-    bush.classList.add("revealed");
-    bush.dataset.pokemon = randomPokemon; 
+  }
+  
+  // Fonction pour initialiser le jeu
+  function initGame() {
+    shuffle(pokemons);
+    const boxes = document.querySelectorAll('.box');
+  
+    boxes.forEach((box, index) => {
+      box.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
+      box.dataset.pokemon = pokemons[index]; // Stocke le Pokémon sous le buisson
+      box.addEventListener('click', handleBoxClick);
     });
-});
-
-function checkMatch() {
-const [first, second] = selectedPokemons;
-
-if (first.pokemon === second.pokemon) {
-    showCaptureAnimation(second.bush);
-    addCapturedPokemon(first.pokemon);
-} 
-else {
-setTimeout(resetBushes, 1000);
-}
-}
-
-function showCaptureAnimation(bush) {
-    const pokeball = document.createElement("div");
-    pokeball.classList.add("pokeball")
-    bush.appendChild(pokeball);
-
-    setTimeout(() => {
-    pokeball.remove();
-    resetBushes();
-    }, 1000);
-}
-
-function addCapturedPokemon(pokemon) {
-    const listItem = document.createElement("li");
-    const img = document.createElement("img");
-    img.src = pokemon;
-    img.classList.add("pokemon");
-    listItem.appendChild(img);
-    capturedList.appendChild(listItem);
-}
-
-function resetBushes() {
-    selectedPokemons.forEach(({ bush }) => {
-    bush.style.backgroundImage = "url('bush.png')";
-    bush.classList.remove("revealed");
-    });
-    selectedPokemons = [];
-    canClick = true;
-}
+  
+    document.getElementById('rejouer').style.display = 'none'; // Cacher le bouton rejouer
+  }
+  
+  // Fonction pour gérer le clic sur un buisson
+  function handleBoxClick(event) {
+    if (isProcessing) return; 
+  
+    const box = event.currentTarget;
+    const pokemon = box.dataset.pokemon;
+  
+    // Afficher le Pokémon
+    box.innerHTML = `<img src="https://img.pokemondb.net/sprites/scarlet-violet/normal/${pokemon}.png" class="pokemon" />`;
+  
+    if (!firstChoice) {
+      firstChoice = pokemon;
+      firstChoiceElement = box;
+    } else {
+      secondChoice = pokemon;
+      secondChoiceElement = box;
+      isProcessing = true; // Indiquer qu'une comparaison est en cours
+  
+      // Comparer les Pokémon
+      setTimeout(() => {
+        if (firstChoice === secondChoice) {
+          // Capturer le Pokémon
+          const capturedList = document.querySelector('.liste_pokemons_captures');
+          const newPokemon = document.createElement('img');
+          newPokemon.src = `https://img.pokemondb.net/sprites/scarlet-violet/normal/${firstChoice}.png`;
+          capturedList.appendChild(newPokemon);
+          // Afficher la pokeball
+          firstChoiceElement.innerHTML += `<img src="./assets/pokeball.png" class="pokeball" />`;
+          secondChoiceElement.innerHTML += `<img src="./assets/pokeball.png" class="pokeball" />`;
+        } else {
+          // Cacher les Pokémon après un délai
+          firstChoiceElement.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
+          secondChoiceElement.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
+        }
+  
+        // Réinitialiser les choix
+        firstChoice = null;
+        secondChoice = null;
+        firstChoiceElement = null;
+        secondChoiceElement = null;
+        isProcessing = false; // Fin de la comparaison
+      }, 1000); // Délai de 1 seconde pour afficher les résultats
+    }
+  }
+  
+  // Événement pour le bouton rejouer
+  document.querySelector('.btn').addEventListener('click', initGame);
+  
+  // Initialiser le jeu au chargement de la page
+  window.onload = initGame; 
+  
