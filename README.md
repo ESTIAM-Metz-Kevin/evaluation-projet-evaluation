@@ -25,7 +25,7 @@ PokeMemon Game est un jeu de mémoire où l'objectif est de trouver les pokemons
 
 ### Dispositions aléatoires des pokemons
 
-Quelque soit la façon dont vous allez gérer cette partie, on doit pouvoir constater que les pokemons ne sont pas toujours au même endroit quand on commence une partie en rechargeant la page ou en cliquant sur le bouton rejouer.
+Quelque soit la façon dont vous allez gérer cette partie, on doit pouvoir constater que les pokemons ne sont pas toujours au même endroit quand on commence une partie en rechargeant la page ou en cliquant sur le bouton rejouer. C EST FAIT 
 
 ### Rejouer
 
