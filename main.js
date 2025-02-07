@@ -1,5 +1,5 @@
-// import pokemons from "./data/pokemon_4x3.js";
 
+// import pokemons from "./data/pokemon_4x3.js";
 // Liste des Pokémon
 const liste_pair_pokemon = [
   'venusaur',
@@ -37,49 +37,50 @@ function initGame() {
   const boxes = document.querySelectorAll('.box');
   boxes.forEach((box, index) => {
       box.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
-      box.dataset.pokemon = liste_pair_pokemon[index];
+      box.dataset.pokemon = liste_pair_pokemon[index]; // Stocke le Pokémon sous le buisson
       box.addEventListener('click', handleBoxClick);
   });
 }
 
 // Fonction pour gérer le clic sur un buisson
 function handleBoxClick(event) {
-  if (isProcessing) return;
+  if (isProcessing) return; 
 
   const box = event.currentTarget;
-  const pokemon_du_buisson = box.dataset.pokemon;
+  const pokemon_du_buisson = box.dataset.pokemon; 
 
-  if (pokemon_du_buisson && box.innerHTML.includes('bush')) {
+  if (pokemon_du_buisson) {
+      // Afficher le Pokémon
       box.innerHTML = `<img src="https://img.pokemondb.net/sprites/scarlet-violet/normal/${pokemon_du_buisson}.png" class="pokemon" />`;
+  } else if (!firstChoice) {
+      firstChoice = pokemon_du_buisson;
+      firstChoiceElement = box;
+  } else {
+      secondChoice = pokemon_du_buisson;
+      secondChoiceElement = box;
+      isProcessing = true; // Indiquer qu'une comparaison est en cours
 
-      if (!firstChoice) {
-          firstChoice = pokemon_du_buisson;
-          firstChoiceElement = box;
-      } else {
-          secondChoice = pokemon_du_buisson;
-          secondChoiceElement = box;
-          isProcessing = true;
+      // Comparer les Pokémon
+      setTimeout(() => {
+          if (firstChoice === secondChoice) {
+              const capturedList = document.querySelector('.liste_pokemons_captures');
+              const newPokemon = document.createElement('img');
+              newPokemon.src = `https://img.pokemondb.net/sprites/scarlet-violet/normal/${firstChoice}.png`;
+              capturedList.appendChild(newPokemon);
+              firstChoiceElement.innerHTML += `<img src="./assets/pokeball.png" class="pokeball" />`;
+              secondChoiceElement.innerHTML += `<img src="./assets/pokeball.png" class="pokeball" />`;
+          } else {
+              firstChoiceElement.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
+              secondChoiceElement.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
+          }
 
-          setTimeout(() => {
-              if (firstChoice === secondChoice) {
-                  const capturedList = document.querySelector('.liste_pokemons_captures');
-                  const newPokemon = document.createElement('img');
-                  newPokemon.src = `https://img.pokemondb.net/sprites/scarlet-violet/normal/${firstChoice}.png`;
-                  capturedList.appendChild(newPokemon);
-                  firstChoiceElement.innerHTML += `<img src="./assets/pokeball.png" class="pokeball" />`;
-                  secondChoiceElement.innerHTML += `<img src="./assets/pokeball.png" class="pokeball" />`;
-              } else {
-                  firstChoiceElement.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
-                  secondChoiceElement.innerHTML = `<img src="./assets/bush.webp" class="bush" />`;
-              }
-
-              firstChoice = null;
-              secondChoice = null;
-              firstChoiceElement = null;
-              secondChoiceElement = null;
-              isProcessing = false;
-          }, 1000);
-      }
+          // Réinitialiser les choix
+          firstChoice = null;
+          secondChoice = null;
+          firstChoiceElement = null;
+          secondChoiceElement = null;
+          isProcessing = false; // Fin de la comparaison
+      }, 1000); // Délai de 1 seconde 
   }
 }
 
