@@ -46,9 +46,9 @@ Quand le joueur a capturé tous les pokemons, il peut rejouer une nouvelle parti
 
 Vous avez vous quelques animations sur les buissons. Ajoutez des animations lorsque :
 
-- Un pokemon s'affiche
-- Une pokeball s'affiche
-- Un pokemon est ajouté à la liste des pokemons capturés
+- Un pokemon s'affiche C'estb ait 
+- Une pokeball s'affiche C'est fait 
+- Un pokemon est ajouté à la liste des pokemons capturés c'est fait 
 
 Ce qui a été utilisé est la librairie [`animate.css`](https://animate.style/).
 Vous n'êtes autorisés à ajouter les animations qu'[avec l'aide de JavaScript](https://animate.style/#javascript). Ce n'est que l'ajout de classes. Lisez bien la documentation sur son fonctionnement.

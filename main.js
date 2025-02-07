@@ -1,5 +1,3 @@
-// import pokemons from "./data/pokemon_4x3.js";
-
 // Liste des Pokémon
 const liste_pair_pokemon = [
   'venusaur',
@@ -22,6 +20,11 @@ let secondChoice = null;
 let firstChoiceElement = null;
 let secondChoiceElement = null;
 let isProcessing = false;
+let nbCoup = 0;
+let recordNbCoup = localStorage.getItem("recordNbCoup") ? parseInt(localStorage.getItem("recordNbCoup")) : 0;
+
+// Affichage du record au chargement
+document.querySelector('#stat_record_nombre_de_coups').textContent = recordNbCoup;
 
 // Fonction pour mélanger les Pokémon
 function shuffle(array) {
@@ -40,6 +43,10 @@ function initGame() {
       box.dataset.pokemon = liste_pair_pokemon[index];
       box.addEventListener('click', handleBoxClick);
   });
+
+  // Réinitialisation des compteurs
+  nbCoup = 0;
+  document.querySelector('#stat_nombre_de_coups').textContent = nbCoup;
 }
 
 // Fonction pour gérer le clic sur un buisson
@@ -59,6 +66,8 @@ function handleBoxClick(event) {
           secondChoice = pokemon_du_buisson;
           secondChoiceElement = box;
           isProcessing = true;
+          nbCoup++; // le compteur de coups
+          document.querySelector('#stat_nombre_de_coups').textContent = nbCoup;
 
           setTimeout(() => {
               if (firstChoice === secondChoice) {
@@ -78,9 +87,24 @@ function handleBoxClick(event) {
               firstChoiceElement = null;
               secondChoiceElement = null;
               isProcessing = false;
+
+              // Vérifie si toutes les paires ont été trouvées
+              if (document.querySelectorAll('.pokeball').length === liste_pair_pokemon.length) 
+              {
+                  finDePartie();
+              }
           }, 1000);
       }
   }
+}
+
+// Fonction pour gérer la fin de partie
+function finDePartie() {
+  if (recordNbCoup === 0 || nbCoup < recordNbCoup) {
+      recordNbCoup = nbCoup;
+      localStorage.setItem("recordNbCoup", recordNbCoup);
+  }
+  document.querySelector('#stat_record_nombre_de_coups').textContent = recordNbCoup;
 }
 
 // Événement pour le bouton rejouer
@@ -88,3 +112,5 @@ document.querySelector('.btn').addEventListener('click', initGame);
 
 // Initialiser le jeu au chargement de la page
 window.onload = initGame;
+
+// 
