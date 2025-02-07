@@ -57,3 +57,13 @@
   width: 30%;
   height: auto;
 }
+.box {
+  min-height: 120px;
+}
+ 
+.box img.pokeball,
+.box img.bush,
+.box img.pokemon {
+  height: 120px;
+  width: auto;
+}
