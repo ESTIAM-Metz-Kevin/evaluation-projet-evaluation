@@ -135,3 +135,10 @@ Note sur 100 points ramené à 20.
 
 **Note :** Des points malus peuvent être données à plusieurs équipes si votre code se ressemble très sensiblement ! Soyez originaux et travaillez dans votre groupe. Je n'interdit pas les échanges, mais évitez de copier/coller du code d'autres équipes.
 Cela compte également pour l'Intelligence Artificielle si elle vous fournit du code très similaire d'une équipe à l'autre ;-)
+
+### COMMENTAIRE :
+Pour le projet, j'ai contribué à la boucle principale du jeu, à la disposition aléatoire des Pokémon, aux statistiques et aux animations.  
+
+Nous avons choisi de travailler séparément et de faire des commits individuels.  
+
+De mon côté, j'estime avoir fourni plus d'efforts et tout le travail que mon binôme, Ahmed, qui ne m'a pas réellement aidé. Sa contribution s'est principalement limitée à refaire mon popre code, ou faire la partie rejouer qui n'est pas aboutis ainsi que la persistance des données qu'il a du recommencer.
